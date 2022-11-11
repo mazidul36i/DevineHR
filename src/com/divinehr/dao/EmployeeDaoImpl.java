@@ -2,6 +2,7 @@ package com.divinehr.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.divinehr.exceptions.DepartmentException;
@@ -16,8 +17,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	@Override
 	public boolean registerEmployee(Employee emp) throws EmployeeException {
 		
-		boolean flag = false;
-		
 		try (Connection conn = DBUtil.provideConnection()) {
 			
 			PreparedStatement ps = conn.prepareStatement("INSERT INTO Employee (name, address, email, password, salary, role) VALUES (?, ?, ?, ?, ?, 'Employee')");
@@ -29,7 +28,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			
 			int x = ps.executeUpdate();
 			
-			if (x > 0) flag = true;
+			if (x > 0) return true;
 			else 
 				throw new EmployeeException("Failed to add Employee..!");
 			
@@ -37,19 +36,74 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			throw new EmployeeException(e.getMessage());
 		}
 		
-		return false;
 	}
 
 	@Override
 	public boolean assignDepartment(int eid, int deptId) throws EmployeeException, DepartmentException {
-		// TODO Auto-generated method stub
-		return false;
+		try (Connection conn = DBUtil.provideConnection()) {
+			
+			PreparedStatement ps1 = conn.prepareStatement("SELECT id FROM Employee WHERE id= ?");
+			ps1.setInt(1, eid);
+			ResultSet rs1 = ps1.executeQuery();
+			if (!rs1.next()) {
+				throw new EmployeeException("No employee found with Id: " + eid);
+			}
+			
+			PreparedStatement ps2 = conn.prepareStatement("SELECT id FROM Department WHERE id= ?");
+			ps2.setInt(1, deptId);
+			ResultSet rs2 = ps2.executeQuery();
+			if (!rs2.next()) {
+				throw new EmployeeException("No department found with Id: " + deptId);
+			}
+			
+			
+			PreparedStatement ps = conn.prepareStatement("UPDATE Employee SET deptId= ? WHERE id= ?");
+			ps.setInt(1, deptId);
+			ps.setInt(2, eid);
+			
+			int x = ps.executeUpdate();
+			
+			if (x > 0) return true;
+			else 
+				throw new EmployeeException("Failed to assign department to Employee with ID " + eid+ "!");
+			
+		} catch (SQLException e) {
+			throw new EmployeeException(e.getMessage());
+		}
 	}
 
 	@Override
 	public boolean transferEmployee(int eid, int deptId) throws EmployeeException, DepartmentException {
-		// TODO Auto-generated method stub
-		return false;
+		try (Connection conn = DBUtil.provideConnection()) {
+			
+			PreparedStatement ps1 = conn.prepareStatement("SELECT id FROM Employee WHERE id= ?");
+			ps1.setInt(1, eid);
+			ResultSet rs1 = ps1.executeQuery();
+			if (!rs1.next()) {
+				throw new EmployeeException("No employee found with Id: " + eid);
+			}
+			
+			PreparedStatement ps2 = conn.prepareStatement("SELECT id FROM Department WHERE id= ?");
+			ps2.setInt(1, deptId);
+			ResultSet rs2 = ps2.executeQuery();
+			if (!rs2.next()) {
+				throw new EmployeeException("No department found with Id: " + deptId);
+			}
+			
+			
+			PreparedStatement ps = conn.prepareStatement("UPDATE Employee SET deptId= ? WHERE id= ?");
+			ps.setInt(1, deptId);
+			ps.setInt(2, eid);
+			
+			int x = ps.executeUpdate();
+			
+			if (x > 0) return true;
+			else 
+				throw new EmployeeException("Failed to assign department to Employee with ID " + eid+ "!");
+			
+		} catch (SQLException e) {
+			throw new EmployeeException(e.getMessage());
+		}
 	}
 
 	@Override

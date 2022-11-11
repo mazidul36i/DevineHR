@@ -9,7 +9,7 @@ public interface DepartmentDao {
 
 	public boolean addDepartment(Department dept) throws DepartmentException;
 	
-	public boolean deleteDepartment(Department dept) throws DepartmentException;
+	public boolean deleteDepartment(int deptId) throws DepartmentException;
 	
 	public Department getDepartment(int deptId) throws DepartmentException;
 	

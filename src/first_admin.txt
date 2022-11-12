@@ -1,0 +1,10 @@
+Hardcode::
+
+Add first Admin
+-----------------------------
+
+Email: admin@divinehr.com
+Password: adminpass
+
+
+INSERT INTO Employee (name, address, email, password, salary, role) VALUES ('Admin', 'Assam', 'admin@divinehr.com', 'adminpass', 500000, 'Admin');

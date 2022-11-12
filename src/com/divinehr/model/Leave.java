@@ -1,14 +1,15 @@
 package com.divinehr.model;
 
 public class Leave {
-	private int eid, deptId;
-	private String leaveMsg, date;
+	private int eid, deptId, id;
+	private String leaveMsg, date, status;
 	//TODO create SQL table
 	
 	public Leave() {}
 
-	public Leave(int eid, int deptId, String leaveMsg, String date) {
+	public Leave(int id, int eid, int deptId, String leaveMsg, String date) {
 		super();
+		this.id = id;
 		this.eid = eid;
 		this.deptId = deptId;
 		this.leaveMsg = leaveMsg;
@@ -47,9 +48,26 @@ public class Leave {
 		this.date = date;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
-		return "Leave [eid=" + eid + ", deptId=" + deptId + ", leaveMsg=" + leaveMsg + ", date=" + date + "]";
+		return "Leave [id=" + id + ", eid=" + eid + ", deptId=" + deptId + ", leaveMsg=" + leaveMsg + ", date=" + date
+				+ ", status=" + status + "]";
 	}
 	
 }

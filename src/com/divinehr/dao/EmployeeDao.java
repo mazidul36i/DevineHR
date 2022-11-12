@@ -1,5 +1,7 @@
 package com.divinehr.dao;
 
+import java.util.List;
+
 import com.divinehr.exceptions.DepartmentException;
 import com.divinehr.exceptions.EmployeeException;
 import com.divinehr.exceptions.LeaveException;
@@ -7,6 +9,8 @@ import com.divinehr.model.Employee;
 import com.divinehr.model.Leave;
 
 public interface EmployeeDao {
+	
+	public Employee login(String email, String password)throws EmployeeException;
 	
 	public boolean registerEmployee(Employee emp) throws EmployeeException;
 	
@@ -24,8 +28,10 @@ public interface EmployeeDao {
 	
 	public boolean changePassword(int eid, String newPassord) throws EmployeeException;
 	
-	public boolean requestLeave(int eid, Leave leave) throws EmployeeException; 
+	public boolean requestLeave(Leave leave) throws EmployeeException; 
 	
-	public boolean leaveApproval(Leave leave) throws LeaveException;
+	public List<Leave> getLeaveRequests() throws LeaveException;
+	
+	public boolean leaveApproval(int id, boolean isApproaved) throws LeaveException;
 	
 }

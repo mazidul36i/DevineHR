@@ -182,6 +182,40 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	}
 
 	@Override
+	public List<Employee> getEmployeeList() throws EmployeeException {
+		List<Employee> employees = new ArrayList<>();
+		
+		try (Connection conn = DBUtil.provideConnection()) {
+			
+			PreparedStatement ps1 = conn.prepareStatement("SELECT * FROM Employee");
+			ResultSet rs = ps1.executeQuery();
+			
+			while (rs.next()) {
+				
+				Employee emp = new Employee();
+				emp = new Employee();
+				emp.setId(rs.getInt("id"));
+				emp.setName(rs.getString("name"));
+				emp.setEmail(rs.getString("email"));
+				emp.setAddress(rs.getString("address"));
+				emp.setRole(rs.getString("role"));
+				emp.setSalary(rs.getInt("salary"));
+				emp.setDeptId(rs.getInt("deptId"));
+				
+				employees.add(emp);
+			} 
+			
+			if (employees.size() == 0)
+				throw new EmployeeException("No employee found to be load!");
+			
+		} catch (SQLException e) {
+			throw new EmployeeException(e.getMessage());
+		}
+		
+		return employees;
+	}
+	
+	@Override
 	public boolean updateName(int eid, String name) throws EmployeeException {
 		try (Connection conn = DBUtil.provideConnection()) {
 			

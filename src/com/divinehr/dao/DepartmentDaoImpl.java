@@ -36,6 +36,13 @@ public class DepartmentDaoImpl implements DepartmentDao {
 	public boolean deleteDepartment(int deptId) throws DepartmentException {
 		try (Connection conn = DBUtil.provideConnection()) {
 			
+			PreparedStatement ps1 = conn.prepareStatement("SELECT * FROM Department WHERE id= ?");
+			ps1.setInt(1, deptId);
+			
+			ResultSet rs = ps1.executeQuery();
+			if (!rs.next()) 
+				throw new DepartmentException("No Department found with ID: " + deptId + "!");
+			
 			PreparedStatement ps = conn.prepareStatement("DELETE FROM Department WHERE id= ?");
 			ps.setInt(1, deptId);
 			

@@ -20,6 +20,8 @@ public interface EmployeeDao {
 	
 	public Employee getEmployee(int eid) throws EmployeeException;
 	
+	public List<Employee> getEmployeeList() throws EmployeeException;
+	
 	public boolean updateName(int eid, String name) throws EmployeeException;
 	
 	public boolean updateAddress(int eid, String newAddress) throws EmployeeException;

@@ -9,8 +9,10 @@ import com.divinehr.dao.EmployeeDao;
 import com.divinehr.dao.EmployeeDaoImpl;
 import com.divinehr.exceptions.DepartmentException;
 import com.divinehr.exceptions.EmployeeException;
+import com.divinehr.exceptions.LeaveException;
 import com.divinehr.model.Department;
 import com.divinehr.model.Employee;
+import com.divinehr.model.Leave;
 import com.divinehr.utility.DivineUtil;
 
 public class Demo {
@@ -200,7 +202,13 @@ public class Demo {
 			DivineUtil.sleep(timer);
 			System.out.println("5 : Get Employee details");
 			DivineUtil.sleep(timer);
-			System.out.println("6 : Back.");
+			
+			System.out.println("6 : Get Leave requat list");
+			DivineUtil.sleep(timer);
+			System.out.println("7 : Approve a leave request");
+			DivineUtil.sleep(timer);
+			
+			System.out.println("8 : Back.");
 			
 			int choice = sc.nextInt();
 			if (choice == 1) {
@@ -214,6 +222,10 @@ public class Demo {
 			} else if (choice == 5) {
 				getEmployeeDetails(sc, user);
 			} else if (choice == 6) {
+				getLeaveRequstList(sc, user);
+			} else if (choice == 7) {
+				
+			} else if (choice == 8) {
 				return;
 			} else {
 				System.out.println("Unknown option selected..!");
@@ -368,6 +380,59 @@ public class Demo {
 		}
 		System.out.println();
 		
+	}
+	
+	public static void getLeaveRequstList(Scanner sc, Employee user) throws EmployeeException {
+		if (!user.getRole().equals("Admin")) {
+			throw new EmployeeException("Access denied!");
+		}
+		
+		System.out.println("\nPlease wait...");
+		try {
+			EmployeeDao ed = new EmployeeDaoImpl();
+			List<Leave> leaves = ed.getLeaveRequests();
+			leaves.forEach(System.out::println);
+		} catch (LeaveException e) {
+			System.out.println("Something went you wrong..!");
+			System.out.println(e.getMessage());
+		}
+		System.out.println();
+		
+	}
+	
+	public static void approveLeaveRequst(Scanner sc, Employee user) throws EmployeeException {
+		if (!user.getRole().equals("Admin")) {
+			throw new EmployeeException("Access denied!");
+		}
+		
+		System.out.println("Please leave request ID: ");
+		int lid = sc.nextInt();
+		
+		System.out.println("Please select an option: ");
+		DivineUtil.sleep(timer);
+		System.out.println("1 : Approve");
+		DivineUtil.sleep(timer);
+		System.out.println("2 : Cancel");
+		DivineUtil.sleep(timer);
+		System.out.println("3 : Back.");
+		
+		int x = sc.nextInt();
+		
+		if (x != 1 && x != 2) return;
+		
+		try {
+			EmployeeDao ed = new EmployeeDaoImpl();
+			ed.leaveApproval(lid, x == 1);
+			if (x == 1)
+				System.out.println("Leave accepted successfully!");
+			else
+				System.out.println("Leave denied successfully!");
+				
+		} catch (LeaveException e) {
+			System.out.println("Something went you wrong..!");
+			System.out.println(e.getMessage());
+		}
+		System.out.println();
 	}
 	
 	
@@ -726,7 +791,9 @@ public class Demo {
 			DivineUtil.sleep(timer);
 			System.out.println("2 : Update profile");
 			DivineUtil.sleep(timer);
-			System.out.println("3 : Exit.");
+			System.out.println("3 : Request for a leave");
+			DivineUtil.sleep(timer);
+			System.out.println("4 : Exit.");
 			
 			int choice = sc.nextInt();
 			if (choice == 1) {
@@ -734,6 +801,8 @@ public class Demo {
 			} else if (choice == 2) {
 				updateProfile(sc, user);
 			} else if (choice == 3) {
+				
+			} else if (choice == 4) {
 				closeProgramm();
 			} else {
 				System.out.println("Unknown option selected..!");
@@ -750,6 +819,33 @@ public class Demo {
 			}
 			
 		}
+	}
+	
+	static void requestLeave(Scanner sc, Employee user) throws EmployeeException {
+		if (user == null) {
+			throw new EmployeeException("Access denied!");
+		}
+		
+		System.out.println("Please write a leave message in 1 line: ");
+		sc.nextLine();
+		String msg = sc.nextLine();
+		
+		try {
+			
+			Leave leave = new Leave();
+			leave.setEid(user.getId());
+			leave.setDeptId(user.getDeptId());
+			leave.setLeaveMsg(msg);
+			
+			EmployeeDao ed = new EmployeeDaoImpl();
+			ed.requestLeave(leave);
+			System.out.println("Leave request sent successfully!");
+			
+		} catch (Exception e) {
+			System.out.println("Something went you wrong: " + e.getMessage());
+			System.out.println("Please try again.");
+		}
+		System.out.println();
 	}
 	
 	public static void displayProfile(Employee emp) {

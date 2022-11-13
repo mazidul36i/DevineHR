@@ -376,7 +376,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		try (Connection conn = DBUtil.provideConnection()) {
 			
 			PreparedStatement ps = conn.prepareStatement("UPDATE `Leave` SET status= ? WHERE id= ?");
-			ps.setString(0, isApproaved ? "approaved" : "cancelled");
+			ps.setString(0, isApproaved ? "approved" : "cancelled");
 			ps.setInt(2, id);
 			
 			int x = ps.executeUpdate();
@@ -391,6 +391,5 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		}
 		
 	}
-
 
 }

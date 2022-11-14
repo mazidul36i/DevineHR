@@ -66,8 +66,12 @@ public class Leave {
 
 	@Override
 	public String toString() {
-		return "Leave [id=" + id + ", eid=" + eid + ", deptId=" + deptId + ", leaveMsg=" + leaveMsg + ", date=" + date
-				+ ", status=" + status + "]";
+		return "Leave ID: " + id
+				+ "\nRequest date: " + date
+				+ "\nLeave message: " + leaveMsg
+				+ "\nEmployee ID: " + eid
+				+ "\nEmployee department ID: " + deptId
+				+ "\nStatus=" + status;
 	}
 	
 }

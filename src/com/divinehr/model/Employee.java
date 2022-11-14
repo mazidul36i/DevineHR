@@ -85,8 +85,19 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", salary=" + salary + ", deptId=" + deptId + ", name=" + name + ", email="
-				+ email + ", password=" + password + ", address=" + address + ", role=" + role + "]";
+		String dept = "";
+		if (deptId != 0) {
+			dept = "\nEmployee department ID: " + deptId;
+		} else {
+			dept = "\nDepartment not assigned";
+		}
+		return "Employee ID: " + id
+				+ "\nEmployee name: " + name
+				+ "\nEmployee email: " + email
+				+ "\nEmployee address: " + address
+				+ "\nEmployee salary: " + salary
+				+ "\nEmployee role: " + role
+				+ dept;
 	}
 	
 }

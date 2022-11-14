@@ -40,7 +40,9 @@ public class Department {
 
 	@Override
 	public String toString() {
-		return "Department [id=" + id + ", name=" + name + ", location=" + location + "]";
+		return "Department ID: " + id
+				+ "\nDepartment name: " + name
+				+ "\nDepartment location: " + location;
 	};
 	
 }

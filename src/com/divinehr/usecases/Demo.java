@@ -90,6 +90,7 @@ public class Demo {
 			int choice = tryAgain(sc);
 			if (choice == 1) {
 				emp = askLogin(sc);
+				return emp;
 			} else if (choice == 2) {
 				return null;
 			} else {
@@ -349,6 +350,7 @@ public class Demo {
 			List<Employee> employees = ed.getEmployeeList();
 			System.out.println("========== Employees =========");
 			employees.forEach(emp -> {
+				System.out.println("-----------------------");
 				System.out.println(emp);
 				DivineUtil.sleep(timer);
 			});
@@ -562,7 +564,9 @@ public class Demo {
 		try {
 			List<Department> departments = dd.getDepartmentList();
 			System.out.println("\n========= Departments ==========");
+			System.out.println("-----------------------");
 			departments.forEach(System.out::println);
+			DivineUtil.sleep(timer);
 			System.out.println("================================");
 		} catch (DepartmentException e) {
 			System.out.println("Something went you wrong!");
@@ -714,6 +718,7 @@ public class Demo {
 		try {
 			EmployeeDao ed = new EmployeeDaoImpl();
 			ed.updateName(user.getId(), name);
+			employee.setName(name);
 			System.out.println("Name updated successfully!");
 		} catch (EmployeeException e) {
 			System.out.println(e.getMessage());
@@ -732,6 +737,7 @@ public class Demo {
 		try {
 			EmployeeDao ed = new EmployeeDaoImpl();
 			ed.updateAddress(user.getId(), address);
+			employee.setAddress(address);
 			System.out.println("Address updated successfully!");
 		} catch (EmployeeException e) {
 			System.out.println(e.getMessage());
@@ -749,6 +755,7 @@ public class Demo {
 		try {
 			EmployeeDao ed = new EmployeeDaoImpl();
 			ed.changeEmail(user.getId(), email);
+			employee.setEmail(email);
 			System.out.println("Email changed successfully!");
 		} catch (EmployeeException e) {
 			System.out.println(e.getMessage());
@@ -767,6 +774,7 @@ public class Demo {
 		try {
 			EmployeeDao ed = new EmployeeDaoImpl();
 			ed.changePassword(user.getId(), pass);
+			employee.setPassword(pass);
 			System.out.println("Password changed successfully!");
 		} catch (EmployeeException e) {
 			System.out.println(e.getMessage());

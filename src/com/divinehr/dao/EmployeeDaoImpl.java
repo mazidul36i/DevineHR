@@ -98,7 +98,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			ps2.setInt(1, deptId);
 			ResultSet rs2 = ps2.executeQuery();
 			if (!rs2.next()) {
-				throw new EmployeeException("No department found with Id: " + deptId);
+				throw new DepartmentException("No department found with Id: " + deptId);
 			}
 			
 			

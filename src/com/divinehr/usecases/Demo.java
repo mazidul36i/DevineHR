@@ -75,7 +75,7 @@ public class Demo {
 		System.out.println("Thanks for using \"Divine HR\"");
 		Thread.currentThread().stop();
 	}
-	
+	/*Ask employee to login again*/
 	static Employee askLogin(Scanner sc) {
 		
 		Employee emp = null;

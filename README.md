@@ -1,15 +1,8 @@
 # DevineHR
-DevineHR is a Hibernet project developed using MySQL database. 
+DevineHR is develpoed to help Admins and Employees providing basic facilities to maintain an environement between Admin and Employee.<br>
+Here, an employee can request for a leave, see their profile, update profile, change password, etc.<br>
+Admin can see all the employee/departments, create new department, add new employee, transfer an employee to diffrent department, etc.
 
-## ER Diagram
-![Mediamodifier-Design-Template](https://user-images.githubusercontent.com/71971788/209420570-3813e5b3-98aa-4bf0-9d99-ec52b6e26085.jpg)
-
-## Tech Stacks
-```
-Java
-MySQL
-```
-   
 ## Features
 Login as Admin/Employee<br>
 Admin can add employee or department<br>
@@ -20,45 +13,50 @@ Employee can update their profile<br>
 Employee can ask for a leave<br>
 Logout
 
+## Tech Stacks Used
+```
+Java
+MySQL
+Hibernate
+Git & GitHub
+```
+
+## ER Diagram
+![Mediamodifier-Design-Template](https://user-images.githubusercontent.com/71971788/209420570-3813e5b3-98aa-4bf0-9d99-ec52b6e26085.jpg)
+
+
 ## MySQL Tables
 ```  
 Employee
 Department
 ```
 
-#### Employee Table
+#### Employee Table Structure
 ```
-create table Employee (
-    id int primary key AUTO_INCREMENT,
-    name varchar(30) NOT NULL,
-    email varchar(30),
-    password varchar(20),
-    address varchar(30),
-    salary int,
-    role varchar(20),
-    deptId int
-);
+id: Int (primary key AUTO_INCREMENT)
+name: String
+email: String
+password: String
+address: String
+salary: Int
+role: String
+deptId: Int
 ```
 #### Department Table
 ```
-create table Department(
-    id int primary key auto_increment,
-    name varchar(30),
-    location varchar(30)
-);
+id: Int (primary key auto_increment)
+name: String
+location: String
 ```
 
 ## Prequiresits
 It is required to have at least one admin registered(hardcoded) on the system. 
 ```
-First Admin
+Demo Admin
 -----------------------------------
 Email: admin@divinehr.com
 Password: adminpass
-```
 
-Demo MySQL command to insert the first admin
-```
 INSERT INTO Employee 
 (name, address, email, password, salary, role)
 VALUES

@@ -57,6 +57,7 @@ Demo Admin
 Email: admin@divinehr.com
 Password: adminpass
 
+// SQL command
 INSERT INTO Employee 
 (name, address, email, password, salary, role)
 VALUES

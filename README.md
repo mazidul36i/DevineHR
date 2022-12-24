@@ -1,5 +1,8 @@
 # DevineHR
-Divine HR is a project that is meant to bring people together and help them connect on a deeper level. It is a console-based "Human Resource Management" project. 
+DevineHR is a Hibernet project developed using MySQL database. 
+
+## ER Diagram
+![Mediamodifier-Design-Template](https://user-images.githubusercontent.com/71971788/209420570-3813e5b3-98aa-4bf0-9d99-ec52b6e26085.jpg)
 
 ## Tech Stacks
 ```
@@ -7,6 +10,16 @@ Java
 MySQL
 ```
    
+## Features
+Login as Admin/Employee<br>
+Admin can add employee or department<br>
+Admin can update user profile<br>
+Admin can see list of employees and departments<br>
+Admin can approave a leave request<br>
+Employee can update their profile<br>
+Employee can ask for a leave<br>
+Logout
+
 ## MySQL Tables
 ```  
 Employee
